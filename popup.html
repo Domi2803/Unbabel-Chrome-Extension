@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .bold{
+        font-weight: bolder;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <a id="logo"><img src="unbabel-logo.png" style="width: 175px; height: auto; cursor: pointer;"></a>
+    <p id="messageSuccess" style="display: none; background-color: greenyellow; padding: 10px; font-weight: bold; text-align: center;">Successfully logged in!</p>
+    <p id="messageFail" style="display: none; background-color: red; padding: 10px; font-weight: bold; text-align: center; color: white;">Invalid email or password</p>
+    <p class="bold">E-Mail: </p>
+    <input id="emailField" type="text" />
+    <p class="bold">Password: </p>
+    <input id="passwordField" type="password" />
+    <p></p>
+    <input type="button" value="Save" id="saveButton"/>
+
+    <script src="popupJS.js"></script>
+  </body>
+</html>
