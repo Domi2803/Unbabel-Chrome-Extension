@@ -19,7 +19,7 @@ function checkBalance(){
                 
                 if(!mode)
                 fetch("https://unbabel.com/editor/get_task_counts/", {method: "get", headers: {cookie: {"sessionid": json.api_key}}}).then(res=>res.json()).then(json=>{
-                    chrome.browserAction.setBadgeText({text: json.paid.toString()});
+                    chrome.browserAction.setBadgeText({text: json.total.toString()});
                 })
                 else
                 chrome.browserAction.setBadgeText({text: "$"+json.balance});
@@ -37,7 +37,6 @@ function fetchCredentials(){
             email = data.email;
             chrome.storage.sync.get('password', data=>{
                 password = data.password;
-                
             });
         });
     })
