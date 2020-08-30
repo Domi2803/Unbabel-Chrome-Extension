@@ -18,8 +18,13 @@ function checkBalance(){
             res.json().then((json=>{
                 
                 if(!mode)
-                fetch("https://unbabel.com/editor/get_task_counts/", {method: "get", headers: {cookie: {"sessionid": json.api_key}}}).then(res=>res.json()).then(json=>{
-                    chrome.browserAction.setBadgeText({text: json.total.toString()});
+                fetch("https://mobile.unbabel.com/mapi/v1/available_tasks", {method: "get", headers: {"Authorization": "ApiKey " + json.username + ":" + json.api_key}}).then(res=>res.json()).then(json=>{
+                    
+                    var totalTasks = 0;
+                    for(var i = 0; i < json.paid.length; i++){
+                        totalTasks += json.paid[i].tasks_available;
+                    }
+                    chrome.browserAction.setBadgeText({text: totalTasks.toString()});
                 })
                 else
                 chrome.browserAction.setBadgeText({text: "$"+json.balance});
@@ -50,7 +55,10 @@ function getTabURL(){
         }, function(tabs) {
             // and use that tab to fill in out title and url
             var tab = tabs[0];
+            if(tab)
             res(tab.url);
+            else
+            res("");
         });
     });
 }
